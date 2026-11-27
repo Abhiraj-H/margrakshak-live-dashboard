@@ -67,7 +67,7 @@ selected_trip = st.sidebar.selectbox("Select Trip", trips)
 simulate_gps = st.sidebar.checkbox("Simulate GPS track if indoor (NO_FIX)", value=True)
 
 df = fetch_trip_telemetry(selected_trip)
-df["recorded_at"] = pd.to_datetime(df["recorded_at"])
+df["recorded_at"] = pd.to_datetime(df["recorded_at"], format="ISO8601", utc=True)
 df["elapsed_sec"] = (df["recorded_at"] - df["recorded_at"].iloc[0]).dt.total_seconds()
 
 st.title("MargRakshak — Live Road Condition & Pothole Telemetry")
